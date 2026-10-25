@@ -3,75 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Smart Spam Mail Detection</title>
+  <title>Spam Mail Detection</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { min-height: 100vh; padding: 3rem 1rem; color: #f2f1ff; font-family: system-ui, sans-serif;
-           background: radial-gradient(circle at top left, #3a1670, #07060f 60%); }
-    .wrap { max-width: 720px; margin: 0 auto; }
-    h1 { text-align: center; font-size: 2.8rem; }
-    h1 span { display: block; color: #7f9bff; }
-    .sub { text-align: center; color: #8c89b5; margin: 1rem 0 2rem; }
-    .card { background: #12112a; border: 1px solid #25234a; border-radius: 16px; padding: 1.5rem; }
-    textarea { width: 100%; min-height: 180px; padding: 1rem; margin: .8rem 0; border-radius: 10px;
-               background: #0a0919; color: #fff; border: 1px solid #25234a; font: inherit; }
-    button { width: 100%; padding: 1rem; border: 0; border-radius: 10px; cursor: pointer;
-             font: inherit; font-weight: 600; color: #fff; background: linear-gradient(90deg, #8b2cf5, #4f6bff); }
-    .result { margin-top: 1.5rem; }
-    .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
-    .safe { color: #2fe0a0; }
-    .spam { color: #ff6b7a; }
-    .confidence { font-size: 1.5rem; color: #b9a2ff; }
-    .checks { display: flex; justify-content: space-around; text-align: center; margin-bottom: 1.2rem; }
-    .circle { width: 70px; height: 70px; margin: 0 auto .5rem; border-radius: 50%;
-              display: grid; place-items: center; font-size: 1.4rem; border: 5px solid #9b6bff; }
-    .ok { opacity: .5; }
-    .why { background: #1a1840; border-radius: 10px; padding: 1rem; }
-    .why p { color: #8c89b5; margin-top: .3rem; }
-    .features { display: flex; gap: 1rem; margin-top: 1.5rem; }
-    .features div { flex: 1; background: #12112a; border: 1px solid #25234a; border-radius: 12px; padding: 1rem; }
-    .features p { color: #8c89b5; font-size: .85rem; margin-top: .3rem; }
-    @media (max-width: 600px) { .features { flex-direction: column; } }
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 15px; }
+    textarea { width: 100%; height: 150px; padding: 10px; font-size: 16px; }
+    button { margin-top: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    .result { margin-top: 20px; padding: 15px; border: 1px solid #ccc; }
+    .spam { color: red; }
+    .safe { color: green; }
   </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>Smart Spam Mail <span>Detection</span></h1>
-  <p class="sub">Protect your inbox using Natural Language Processing and Machine Learning.</p>
+  <h1>Spam Mail Detection</h1>
+  <p>Paste an email message to check whether it is spam.</p>
 
-  <div class="card">
-    <h2>Analyze Your Email</h2>
-    <form method="POST">
-      <textarea name="message" required placeholder="Paste the email message here...">{{ message }}</textarea>
-      <button type="submit">Analyze Email</button>
-    </form>
+  <form method="POST">
+    <textarea name="message" required placeholder="Type or paste the email here...">{{ message }}</textarea>
+    <br>
+    <button type="submit">Analyze</button>
+  </form>
 
-    {% if result %}
-    <div class="result">
-      <div class="top">
-        <h3 class="{{ 'spam' if is_spam else 'safe' }}">{{ result }}</h3>
-        <div>Confidence <span class="confidence">{{ confidence }}%</span></div>
-      </div>
-
-      <div class="checks">
-        {% for title, label, flagged in checks %}
-        <div>
-          <div class="circle {{ '' if flagged else 'ok' }}">{{ '⚠' if flagged else '✓' }}</div>
-          <b>{{ title }}</b><br><small>{{ label }}</small>
-        </div>
-        {% endfor %}
-      </div>
-
-      <div class="why"><b>Why this result?</b><p>{{ reason }}</p></div>
-    </div>
-    {% endif %}
+  {% if result %}
+  <div class="result">
+    <h2 class="{{ 'spam' if 'SPAM' in result else 'safe' }}">{{ result }}</h2>
+    <p>Confidence: {{ confidence }}%</p>
+    <p>Reason: {{ reason }}</p>
   </div>
-
-  <div class="features">
-    <div><b>NLP Processing</b><p>Removes common stop words from the message.</p></div>
-    <div><b>TF-IDF Analysis</b><p>Scores words by how useful they are for spotting spam.</p></div>
-    <div><b>Naive Bayes</b><p>Predicts spam or safe with a confidence score.</p></div>
-  </div>
-</div>
+  {% endif %}
 </body>
 </html>
