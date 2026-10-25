@@ -27,7 +27,7 @@ Open http://127.0.0.1:5000
    ```
 2. Go to https://vercel.com/new, import the repo, keep the defaults, click **Deploy**.
    (Vercel detects Flask from `app.py` + `requirements.txt`.)
-
+https://spam-mail-detector-app.vercel.app/
 ## Test messages
 
 - Spam: `Subject: You Won a ₹50,000 Cash Prize! Claim your FREE reward NOW. Click here, limited time offer.`
