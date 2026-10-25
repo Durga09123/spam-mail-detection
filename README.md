@@ -31,4 +31,4 @@ Open http://127.0.0.1:5000
 ## Test messages
 
 - Spam: `Subject: You Won a ₹50,000 Cash Prize! Claim your FREE reward NOW. Click here, limited time offer.`
-- Safe: `Hi Harshini, Good morning. Please bring the project report for tomorrow's meeting.`
+- Safe: `Hi Divya, Good morning. Please bring the project report for tomorrow's meeting.`
